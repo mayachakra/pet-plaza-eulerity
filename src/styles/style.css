@@ -1,0 +1,13 @@
+/* Basic Styles, Fonts, and Sizes */
+
+header {
+    text-align: center;
+}
+
+img {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
