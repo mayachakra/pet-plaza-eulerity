@@ -11,7 +11,7 @@ const HeaderWrap = styled.header`
 const NavWrap = styled.nav`
     ul{
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         list-style: none;
         font-size: 120%;
         font-family: avenir;
@@ -33,20 +33,17 @@ const NavWrap = styled.nav`
 
 const Title = styled.h1`
     margin-bottom:20px;
-    text-align: center;
-    font-size: 400%;
-    font-family: avenir;
-
 `;
 
-const Header: React.FC = () => {
+const Footer: React.FC = () => {
     return (
         <HeaderWrap>
-             <Title>Pet Plaza</Title>
+            <Title></Title>
             <NavWrap>
                 <ul>
-                    <li><a href="/">Gallery</a></li>
-                    <li><a href="/aboutme">About Me</a></li>
+                    <li><a href="https://www.linkedin.com/in/maya-chakravarty-968b6322a/">LinkedIn</a></li>
+                    |
+                    <li><a href="https://github.com/mayachakra">GitHub</a></li>
                 </ul>
             </NavWrap>
         </HeaderWrap>
@@ -54,4 +51,4 @@ const Header: React.FC = () => {
     );
 };
 
-export default Header;
+export default Footer;

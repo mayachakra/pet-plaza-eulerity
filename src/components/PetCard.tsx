@@ -2,9 +2,12 @@ import React from 'react';
 import { Pet } from '../models/Pet';
 import styled from 'styled-components';
 
+interface CardProps {
+    isSelected: boolean;
+}
 
-const CardWrap = styled.div`
-    background-color: #3C4F76;
+const CardWrap = styled.div<CardProps>`
+    background-color: ${props => props.isSelected ? '#718040' : '#3C4F76'};
     color: #FEEFDD;
     padding: 10px 0;
     text-align: left;
@@ -48,11 +51,13 @@ const PetDesc = styled.p`
 
 interface PetCardProperty{
     pet: Pet;
+    isSelected: boolean;
+    onSelect: () => void;
 }
 
-const PetCard: React.FC<PetCardProperty> = ({ pet }) => {
+const PetCard: React.FC<PetCardProperty> = ({ pet, isSelected, onSelect }) => {
     return (
-        <CardWrap>
+        <CardWrap isSelected={isSelected} onClick={onSelect}>
             <CardTitle>{pet.name}</CardTitle>
             <PetImage src={pet.imageURL} alt={pet.name}/>
             <CardAlign>

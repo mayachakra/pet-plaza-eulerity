@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutMe from './components/AboutMe';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -24,6 +25,7 @@ function App() {
         <Route path="/aboutme" element={<AboutMe />} />
         </Routes>
         </Container>
+        <Footer />
       </div>
     </Router>
   );

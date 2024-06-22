@@ -13,37 +13,22 @@ const HomePageWrap = styled.div`
 const Title = styled.h1`
     margin-bottom:20px;
     text-align: center;
-    font-size: 400%;
-    font-family: serif;
+    font-size: 300%;
+    font-style: bold;
+`;
 
+const Desc = styled.p`
+    text-align: center;
 `;
 
 ////why doesnt it center
 
 const HomePage: React.FC = () => {
-    /*
-    const { petData, loading, error} = petData();
-    const [ selectedPets, setSelectedPets ] = useState<Pet[]>([]);
-    const [ sortOrder, setSortOrder ] = useState<'asc' | 'desc'>('asc');
-
-    useEffect(() => {
-        //fetch data
-    }, []);
-
-    //add handle functions
-
-    const sortedPetData = petData.sort((a, b) => {
-        if (sortOrder === 'asc') {
-            return a.title.localeCompare(b.title);
-        }
-        return b.title.localeCompare(a.title); 
-    });
-    */
-
     return (
         <HomePageWrap>
-            <Title>Pet Plaza</Title>
-            <p>Here is the home page!</p>
+            <Title>Welcome</Title>
+            <Desc>Here at <strong>Pet Plaza</strong> you may meet our lovely furry friends down below.
+                <br></br> You are welcome to download their photos once selected!</Desc>
             <PetGallery />
         </HomePageWrap>
     );

@@ -11,3 +11,7 @@ img {
     overflow: hidden;
     display: block;
 }
+
+h1, h2, p {
+    font-family: avenir;
+}
