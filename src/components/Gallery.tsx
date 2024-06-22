@@ -39,8 +39,8 @@ const GalleryGridResp = styled.div`
 
 const ModificationContainer = styled.div`
     display: flex;
-    justify-content: space-between;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 `;
 
 const Button = styled.button`
@@ -56,12 +56,21 @@ const Button = styled.button`
     }
 `;
 
+const SearchBar = styled.input`
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+`;
 
 const Gallery: React.FC = () => {
     const { pets } = petData(sampleData);
     const [selectedPets, setSelectedPets] = useState<string[]>([]);
     const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
     const [sortedPets, setSortedPets] = useState(pets);
+    const [searchTerm, setSearchTerm] = useState('');
 
 
     const togglePetSelect = useCallback((id: string) => {
@@ -76,7 +85,12 @@ const Gallery: React.FC = () => {
     };
 
     useEffect (() => {
-        const sorted = [...pets].sort((a,b) => {
+
+        const filtered = pets.filter(pet => 
+          pet.name.toLowerCase().includes(searchTerm.toLowerCase()) || pet.description.toLowerCase().includes(searchTerm.toLowerCase())  
+        );
+
+        const sorted = [...filtered].sort((a,b) => {
             if (sortOrder === 'asc'){
                 return a.name.localeCompare(b.name);
             } else {
@@ -84,7 +98,7 @@ const Gallery: React.FC = () => {
             }
         });
         setSortedPets(sorted);
-    }, [pets, sortOrder]);
+    }, [pets, sortOrder, searchTerm]);
 
     const downloadSelectImg = async () => {
         for (const id of selectedPets){
@@ -109,28 +123,28 @@ const Gallery: React.FC = () => {
         }
     };
 
-    // const sortedPets = useMemo(() => {
-    //     return[...pets].sort((a,b) => {
-    //         if (sortOrder === 'asc'){
-    //             return a.name.localeCompare(b.name);
-    //         } else {
-    //             return b.name.localeCompare(a.name);
-    //         }
-    //     });
-    // }, [pets, sortOrder]);
-
     const selectAll = () => {
-        setSelectedPets(pets.map(pet => pet.id));
+        setSelectedPets(sortedPets.map(pet => pet.id));
     };
 
     const clearSelection = () => {
         setSelectedPets([]);
     };
 
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    }
+
     return (
         <GalleryContainer>
             <ModificationContainer>
             <Title>Gallery</Title>
+            <SearchBar
+                type="text"
+                placeholder="search by name or description..."
+                value={searchTerm}
+                onChange={handleSearch}
+            />
                 <Button onClick={selectAll}>Select All</Button>
                 <Button onClick={clearSelection}>Clear All</Button>
                 <Button onClick={sortPets}>
@@ -143,7 +157,7 @@ const Gallery: React.FC = () => {
 
 
             <GalleryGridResp>
-                {pets.map((pet) => (
+                {sortedPets.map((pet) => (
                     <PetCard key={pet.id} pet={pet} isSelected={selectedPets.includes(pet.id)} onSelect={() => togglePetSelect(pet.id)}/>
                 ))}
             </GalleryGridResp>
